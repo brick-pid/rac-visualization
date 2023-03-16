@@ -14,7 +14,7 @@ function Graph () {
       return (
         <div>
           <p>ID: {model.id}</p>
-          <p>Label: {model.style.keyshape.size}</p>
+          <p>Score: {model.style.keyshape.size}</p>
         </div>
       )
     }
@@ -23,7 +23,7 @@ function Graph () {
   return (
     <Graphin data={graphStore.graphData} >
       <ZoomCanvas disabled />
-      <Tooltip bindType="node" style={{ padding: '10px' }}>
+      <Tooltip bindType="node" style={{ padding: '10px', width: '250px' }}>
         {handleTooltip}
       </Tooltip>
     </Graphin>
