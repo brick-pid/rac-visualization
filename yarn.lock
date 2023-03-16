@@ -245,7 +245,14 @@
   dependencies:
     "@antv/g6-pc" "0.8.7"
 
-"@antv/graphin@^2.7.13":
+"@antv/graphin-components@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.npmjs.org/@antv/graphin-components/-/graphin-components-2.4.0.tgz"
+  integrity sha512-ADVcQlwMO9p18qBIxdK+nddzA+73OXxKPSLMeeF5B4f9USvC9b4cB9q4ciYbslRQrpUkUpWBdbY+44jq38f/Yg==
+  dependencies:
+    "@antv/util" "^2.0.10"
+
+"@antv/graphin@^2.*", "@antv/graphin@^2.7.13":
   version "2.7.13"
   resolved "https://registry.npmjs.org/@antv/graphin/-/graphin-2.7.13.tgz"
   integrity sha512-4ZwL0Q34G7nkji3WawBipaWt3JGNa3ucMjhEtDSU8A0uVfP4k1kpGUl5bTjhD5cEzg7CU3GOQ9itr7/Mco2npA==
