@@ -16,7 +16,8 @@ function Graph () {
       return (
         <div>
           <p>ID: {model.id}</p>
-          <p>Score: {model.style.keyshape.size}</p>
+          <p>Application: Dashboard</p>
+          <p>Score: {model.style.keyshape.size.toFixed(2)}</p>
         </div>
       )
     }
@@ -28,7 +29,7 @@ function Graph () {
       <Graphin data={graphStore.graphData} layout={graphStore.layout} style={{ height: '1000px' }} >
         <ZoomCanvas disabled />
         <ActivateRelations trigger="click" />
-        <Tooltip bindType="node" style={{ padding: '10px', width: '250px' }}>
+        <Tooltip bindType="node" style={{ width: '200px' }}>
           {handleTooltip}
         </Tooltip>
       </Graphin>
