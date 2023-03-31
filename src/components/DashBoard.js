@@ -1,29 +1,43 @@
 import React from 'react'
 import { Layout, Menu } from 'antd'
 import Graph from './Graph'
+import Rank from './Rank'
+import Application from './Application'
+import Setting from './Setting'
+import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
 
-const { Header, Content, Footer } = Layout
+const { Header } = Layout
 
 
 function Dashboard () {
   return (
-    <Layout>
-      <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">Dashboard</Menu.Item>
-          <Menu.Item key="2">Users</Menu.Item>
-          <Menu.Item key="3">Settings</Menu.Item>
-        </Menu>
-      </Header>
-      <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-        <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-          Content
-          <Graph />
-        </div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+          <div className="logo" />
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1">
+              <NavLink to='/graph' activeClassName="active"> Graph </NavLink>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <NavLink to='/rank' activeClassName="active"> Rank </NavLink>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <NavLink to='/application' activeClassName="active"> Application </NavLink>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <NavLink to='/setting' activeClassName="active"> Setting </NavLink>
+            </Menu.Item>
+          </Menu>
+        </Header>
+        <Routes>
+          <Route path="/graph" element={<Header><Graph /></Header>} />
+          <Route path="/rank" element={<Header><Rank /></Header>} />
+          <Route path="/application" element={<Header><Application /></Header>} />
+          <Route path="/setting" element={<Header><Setting /></Header>} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   )
 }
 
