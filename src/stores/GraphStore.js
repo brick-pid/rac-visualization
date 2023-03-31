@@ -44,6 +44,39 @@ const edges_data = edges.map((edge) => ({
   }
 }))
 
+// add a method to get critical path which will be highlighted visually
+const criticalPath = [
+  {
+    source: "istio-ingressgateway",
+    target: "ts-order-service"
+  },
+  {
+    source: "ts-order-service",
+    target: "ts-payment-service"
+  },
+  {
+    source: "istio-ingressgateway",
+    target: "ts-admin-order-service"
+  },
+  {
+    source: "istio-ingressgateway",
+    target: "ts-ui-dashboard"
+  },
+  {
+    source: "ts-admin-order-service",
+    target: "ts-order-service"
+  }
+]
+// make the edge of the critical path red
+edges_data.forEach((edge) => {
+  criticalPath.forEach((criticalEdge) => {
+    if (edge.source === criticalEdge.source && edge.target === criticalEdge.target) {
+      edge.style.keyshape.stroke = "#f5222d"
+    }
+  })
+})
+
+
 
 const graphDataMooc = {
   "nodes": nodes,
@@ -66,7 +99,7 @@ class GraphStore {
   setGraphData = (graphData) => {
     this.graphData = graphData
   }
-}
 
+}
 const graphStore = new GraphStore()
 export default graphStore
