@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout, Menu } from 'antd'
 import Graph from './Graph'
 import Rank from './Rank'
-import Application from './Application'
+import MicroservicesPage from './MicroservicesPage'
 import Setting from './Setting'
 import LoginPage from './Login'
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
@@ -24,7 +24,7 @@ function Dashboard () {
               <NavLink to='/rank' activeClassName="active"> Rank </NavLink>
             </Menu.Item>
             <Menu.Item key="3">
-              <NavLink to='/application' activeClassName="active"> Application </NavLink>
+              <NavLink to='/microservices' activeClassName="active"> Microservices </NavLink>
             </Menu.Item>
             <Menu.Item key="4">
               <NavLink to='/setting' activeClassName="active"> Setting </NavLink>
@@ -34,7 +34,7 @@ function Dashboard () {
         <Routes>
           <Route path="/graph" element={<Header><Graph /></Header>} />
           <Route path="/rank" element={<Header><Rank /></Header>} />
-          <Route path="/application" element={<Header><Application /></Header>} />
+          <Route path="/microservices" element={<Header><MicroservicesPage /></Header>} />
           <Route path="/setting" element={<Header><Setting /></Header>} />
           <Route path="login" element={<Header><LoginPage /></Header>} />
         </Routes>
