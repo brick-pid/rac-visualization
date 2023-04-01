@@ -1,20 +1,34 @@
-//可疑微服务排名组件
 import { observer } from 'mobx-react-lite'
 import graphStore from '../stores/GraphStore'
-import { List } from 'antd'
+import { List, Typography, Card } from 'antd'
+
+const { Title } = Typography
 
 const Rank = () => {
-  const scores = { 'istio-ingressgateway': 1128.8893690579082, 'ts-admin-order-service': 366.953385127636, 'ts-ui-dashboard': 32.84087411511234 }
-  const data = Object.entries(scores).map(([key, value]) => ({ name: key, score: value.toFixed(2) }))
+  const scores = {
+    'istio-ingressgateway': 1128.8893690579082,
+    'ts-admin-order-service': 366.953385127636,
+    'ts-ui-dashboard': 32.84087411511234,
+  }
+  const data = Object.entries(scores).map(([key, value]) => ({
+    name: key,
+    score: value.toFixed(2),
+  }))
+
   return (
-    <div style={{ marginTop: '50px' }}>
-      <h1>可疑微服务排名</h1>
+    <div style={{ marginTop: '90px' }}>
+      <Title level={2}>可疑微服务排名</Title>
       <List
+        itemLayout="vertical"
         dataSource={data}
-        renderItem={item => (
+        renderItem={(item, index) => (
           <List.Item>
-            <List.Item.Meta title={item.name} description={
-              `Score: ${item.score}`} />
+            <Card>
+              <List.Item.Meta
+                title={`${index + 1}. ${item.name}`}
+                description={`Score: ${item.score}`}
+              />
+            </Card>
           </List.Item>
         )}
       />
