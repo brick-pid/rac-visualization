@@ -4,6 +4,7 @@ import Graph from './Graph'
 import Rank from './Rank'
 import Application from './Application'
 import Setting from './Setting'
+import LoginPage from './Login'
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
 
 const { Header } = Layout
@@ -35,6 +36,7 @@ function Dashboard () {
           <Route path="/rank" element={<Header><Rank /></Header>} />
           <Route path="/application" element={<Header><Application /></Header>} />
           <Route path="/setting" element={<Header><Setting /></Header>} />
+          <Route path="login" element={<Header><LoginPage /></Header>} />
         </Routes>
       </Layout>
     </BrowserRouter>
