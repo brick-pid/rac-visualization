@@ -67,6 +67,7 @@ const criticalPath = [
     target: "ts-order-service"
   }
 ]
+
 // make the edge of the critical path red
 edges_data.forEach((edge) => {
   criticalPath.forEach((criticalEdge) => {
@@ -91,13 +92,17 @@ class GraphStore {
   constructor() {
     makeAutoObservable(this)
   }
-
-  // Observable state
+  // graph data
   graphData = graphDataMooc
-
-  // Actions
   setGraphData = (graphData) => {
     this.graphData = graphData
+  }
+
+  // layout
+  layout = 'graphin-force'
+  setLayout = (layout) => {
+    this.layout = layout
+    console.log('change layout to ', this.layout)
   }
 
 }

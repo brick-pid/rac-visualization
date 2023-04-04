@@ -2,12 +2,16 @@ import Graphin, { Behaviors } from "@antv/graphin"
 import graphStore from "../stores/GraphStore"
 import { observer } from "mobx-react-lite"
 import { Components } from "@antv/graphin"
+import { Button } from "antd"
 import LayoutSelection from "./LayoutSelection"
+import { useState } from "react"
 
 const { Tooltip } = Components
 
 
 const { ZoomCanvas, ActivateRelations } = Behaviors
+
+
 
 function Graph () {
   const handleTooltip = (value) => {
@@ -23,16 +27,19 @@ function Graph () {
     }
     return null
   }
+
   return (
-    <div style={{ marginTop: '10px' }}>
-      <LayoutSelection onChange={(value) => graphStore.setLayout(value)} />
-      <Graphin data={graphStore.graphData} layout={graphStore.layout} style={{ height: '1000px' }} >
-        <ZoomCanvas disabled />
+    <div>
+      <LayoutSelection />
+      <Button onClick={() => { }} style={{ marginLeft: '10px' }}> test button</Button>
+
+      <Graphin data={graphStore.graphData} layout={{ type: graphStore.layout }} style={{ height: '1000px' }} >
         <ActivateRelations trigger="click" />
         <Tooltip bindType="node" style={{ width: '200px' }}>
           {handleTooltip}
         </Tooltip>
       </Graphin>
+
     </div>
   )
 }
