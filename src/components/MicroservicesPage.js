@@ -27,7 +27,7 @@ const mockData = [
 
 const MicroservicesPage = () => {
   return (
-    <div style={{ padding: '2rem', marginTop: '50px' }}>
+    <div style={{ marginTop: '10px' }}>
       <Title level={2}>微服务信息检索</Title>
       <Collapse accordion>
         {mockData.map((app) => (
