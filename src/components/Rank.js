@@ -16,7 +16,7 @@ const Rank = () => {
   }))
 
   return (
-    <div style={{ marginTop: '90px' }}>
+    <div style={{ marginTop: '10px' }}>
       <Title level={2}>可疑微服务排名</Title>
       <List
         itemLayout="vertical"

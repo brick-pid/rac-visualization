@@ -24,7 +24,7 @@ function Graph () {
     return null
   }
   return (
-    <div style={{ marginTop: '50px' }}>
+    <div style={{ marginTop: '10px' }}>
       <LayoutSelection onChange={(value) => graphStore.setLayout(value)} />
       <Graphin data={graphStore.graphData} layout={graphStore.layout} style={{ height: '1000px' }} >
         <ZoomCanvas disabled />
