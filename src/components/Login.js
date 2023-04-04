@@ -6,7 +6,7 @@ import userStore from '../stores/UserStore'
 
 const { Title } = Typography
 
-const LoginPage = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -22,7 +22,7 @@ const LoginPage = () => {
     const storedPassword = userStore.user.password
 
     if (values.username === storedUsername && values.password === storedPassword) {
-      navigate('/graph')
+      navigate('/')
     } else {
       message.error('账号密码错误，请重新输入！')
     }
@@ -65,4 +65,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default Login

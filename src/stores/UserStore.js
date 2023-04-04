@@ -8,8 +8,8 @@ class UserStore {
 
   // Observable state
   user = {
-    account: 'brick',
-    password: 'brick',
+    account: 'admin',
+    password: 'admin',
   }
 
   // Actions
