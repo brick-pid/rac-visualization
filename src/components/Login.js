@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <div>
-        <Title level={2} style={{ textAlign: 'center' }}>用户登录</Title>
+        <Title level={2} style={{ textAlign: 'center' }}>RCA 系统登录</Title>
         <Form
           name="login_form"
           initialValues={{ remember: true }}
