@@ -22,21 +22,21 @@ function Dashboard () {
             defaultOpenKeys={['sub1']}
             style={{ height: '100%', borderRight: 0 }}
           >
-            <SubMenu key="sub1" title="Graph">
+            <SubMenu key="sub1" title="微服务拓扑">
               <Menu.Item key="1">
                 <NavLink to="/graph">
                   Graph
                 </NavLink>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" title="Rank">
+            <SubMenu key="sub2" title="可疑微服务排序">
               <Menu.Item key="2">
                 <NavLink to="/rank">
                   Rank
                 </NavLink>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub3" title="Microservices">
+            <SubMenu key="sub3" title="微服务数据">
               <Menu.Item key="3">
                 <NavLink to="/microservicesPage">
                   Microservices Page
@@ -48,7 +48,7 @@ function Dashboard () {
                 </NavLink>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4" title="Setting">
+            <SubMenu key="sub4" title="自定义设置">
               <Menu.Item key="4">
                 <NavLink to="/setting">
                   Setting
