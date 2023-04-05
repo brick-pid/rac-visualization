@@ -22,7 +22,7 @@ const Login = () => {
     const storedPassword = userStore.user.password
 
     if (values.username === storedUsername && values.password === storedPassword) {
-      navigate('/')
+      navigate('/graph')
     } else {
       message.error('账号密码错误，请重新输入！')
     }
