@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Microservices Root Cause Analysis System (MRCA)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Introduction](#introduction)
+- [Key Features](#key-features)
+- [Technologies](#technologies)
+- [Root Cause Analysis Algorithm](#root-cause-analysis-algorithm)
+- [Frontend Implementation](#frontend-implementation)
+- [Getting Started](#getting-started)
+- [License](#license)
 
-In the project directory, you can run:
+## Introduction
 
-### `npm start`
+As microservices architecture gains popularity with the rapid development of the internet, it's crucial to locate the root cause of failures in a timely manner. The Microservices Root Cause Analysis System (MRCA) is designed to provide an intuitive and efficient solution to visualize microservices topology, locate failures, and assist in troubleshooting.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1.  **Intuitive User Interface**: The user interface should be easy to use and provide a friendly experience for operators. It includes microservices topology maps and service invocation paths, allowing users to view specific service status and performance metrics.
+2.  **Microservices Topology Visualization**: Visualize microservices topology for users to quickly understand the overall architecture and dependencies between services. Topology maps should support common interaction operations and update automatically based on service status changes.
+3.  **Efficient and Accurate Fault Root Cause Query**: Provide efficient and accurate fault root cause query capabilities, quickly locating the root cause and assisting operators in solving anomalies and failures in microservices systems.
+4.  **Multiple Root Cause Analysis Methods**: Support multiple root cause analysis methods, allowing operators to choose the most suitable method for specific situations.
 
-### `npm test`
+## Technologies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+MRCA uses a web-based frontend-backend architecture with three main layers: interaction, business logic, and data persistence. The frontend is developed with React, Ant Design UI components, and Graphin visualization components. The backend is built with Spring Boot and implements the RCA algorithm. The data persistence layer handles database design and connects the backend with the database.
 
-### `npm run build`
+## Root Cause Analysis Algorithm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The project has implemented the TraceRCA root cause analysis algorithm, which consists of three parts: anomaly detection, suspicious microservices set mining, and microservices ranking. This algorithm helps operators perform root cause analysis, improving fault localization efficiency and reducing the risk of prolonged system failures.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Frontend Implementation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The frontend visualization page has been developed with user experience and operational convenience in mind. The page layout is clear, and functional areas are well-defined. The frontend mainly includes the following modules:
 
-### `npm run eject`
+1.  **Visualization Module**: Display the microservices topology and fault propagation paths.
+2.  **Query, Search, and Filtering Module**: Quickly locate required microservices information through keyword input and filtering conditions.
+3.  **User Interaction Interface Module**: Provides an easy-to-use interface for users to efficiently troubleshoot faults.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To set up the project locally, follow these steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1.  Clone the repository:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+bash
 
-## Learn More
+```bash
+git clone https://github.com/username/microservices-root-cause-analysis.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2.  Install frontend dependencies:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+bash
 
-### Code Splitting
+```bash
+cd frontend
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3.  Start the frontend development server:
 
-### Analyzing the Bundle Size
+sql
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```sql
+npm start
+```
 
-### Making a Progressive Web App
+4.  Install backend dependencies and start the backend server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+bash
 
-### Advanced Configuration
+```bash
+cd backend
+./mvnw spring-boot:run
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+5.  Open a web browser and navigate to `http://localhost:3000` to access the application.
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](LICENSE).
