@@ -12,7 +12,7 @@
 
 ## Introduction
 
-As microservices architecture gains popularity with the rapid development of the internet, it's crucial to locate the root cause of failures in a timely manner. The Microservices Root Cause Analysis System (MRCA) is designed to provide an intuitive and efficient solution to visualize microservices topology, locate failures, and assist in troubleshooting.
+With the growing adoption of microservices architecture, quickly identifying the root cause of failures has become essential. The Microservices Root Cause Analysis System (MRCA) offers a user-friendly and efficient way to visualize microservices topology, pinpoint failures, and aid in problem-solving. This project focuses on the front-end aspect of the system.
 
 ## Key Features
 
