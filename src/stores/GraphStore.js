@@ -34,26 +34,6 @@ const nodes = service_data.map(service => ({
 }))
 
 
-// ---- edge data ----
-//get edges from http://localhost:8080/invocation/edges
-let edges_data = []
-axios.get('http://localhost:8080/invocation/edges')
-  .then(response => {
-    edges_data = response.data.map((edge) => ({
-      source: edge.source,
-      target: edge.target,
-      style: {
-        keyshape: {
-          lineWidth: edge.probability * 1200,
-        }
-      }
-    }))
-    console.log("edges_data", edges_data)
-  })
-  .catch(error => {
-    console.error("error", error)
-  })
-
 // add a method to get critical path which will be highlighted visually
 const criticalPath = [
   {
@@ -87,22 +67,20 @@ const criticalPath = [
 //   })
 // })
 
-
-
-const graphDataMooc = {
-  "nodes": nodes,
-  "edges": edges_data
-}
-
-console.log("graphData", graphDataMooc)
-
 class GraphStore {
   constructor() {
     makeAutoObservable(this)
   }
 
   // graph data
-  graphData = graphDataMooc;
+  graphData = {
+    nodes: nodes,
+    edges: []
+  };
+
+  // 添加一个状态，表示边数据是否已加载
+  isEdgesDataLoaded = false;
+
   setGraphData = (graphData) => {
     this.graphData = graphData
   };
@@ -131,13 +109,14 @@ const fetchEdgesData = action(async () => {
       target: edge.target,
       style: {
         keyshape: {
-          lineWidth: edge.probability * 1200,
+          lineWidth: edge.probability * 120,
         },
       },
     }))
-    // 请求成功后，调用`setEdgesData`方法更新`edges_data`
+    // 请求成功后，调用`setEdgesData`方法更新`edges_data`，并将`isEdgesDataLoaded`设置为`true`
     graphStore.setEdgesData(edges_data)
-    console.log("请求edges数据完成", graphStore.graphData)
+    graphStore.isEdgesDataLoaded = true
+    console.log("graphStore 中请求 edges 数据完成", graphStore.graphData)
   } catch (error) {
     console.error("error", error)
   }

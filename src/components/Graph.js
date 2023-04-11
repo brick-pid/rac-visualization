@@ -4,12 +4,11 @@ import { observer } from "mobx-react-lite"
 import { Components } from "@antv/graphin"
 import { Button } from "antd"
 import LayoutSelection from "./LayoutSelection"
-import { useState } from "react"
 
 const { Tooltip } = Components
 
 
-const { ZoomCanvas, ActivateRelations } = Behaviors
+const { ActivateRelations } = Behaviors
 
 
 
@@ -28,20 +27,26 @@ function Graph () {
     return null
   }
 
+  console.log("在 Graph 组件中 ：graphStore.graphData", graphStore.graphData)
+
   return (
     <div>
       <LayoutSelection />
       <Button onClick={() => { }} style={{ marginLeft: '10px' }}> test button</Button>
 
-      <Graphin data={graphStore.graphData} layout={{ type: graphStore.layout }} style={{ height: '1000px' }} >
-        <ActivateRelations trigger="click" />
-        <Tooltip bindType="node" style={{ width: '200px' }}>
-          {handleTooltip}
-        </Tooltip>
-      </Graphin>
-
+      {graphStore.isEdgesDataLoaded && (
+        <Graphin
+          data={graphStore.graphData}
+          layout={{ type: graphStore.layout }}
+          style={{ height: "1000px" }}
+        >
+          <ActivateRelations trigger="click" />
+          <Tooltip bindType="node" style={{ width: "200px" }}>
+            {handleTooltip}
+          </Tooltip>
+        </Graphin>
+      )}
     </div>
   )
 }
-
 export default observer(Graph)
