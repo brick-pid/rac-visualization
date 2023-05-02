@@ -63,9 +63,24 @@ function Graph () {
 
 
 
-      {graphStore.isEdgesDataLoaded && (
+      {graphStore.isEdgesDataLoaded && graphStore.isNodesDataLoaded && (
         <Graphin
-          data={graphStore.graphData}
+          data={{
+            nodes: graphStore.graphData.nodes.map((node) => {
+              return {
+                id: node.service_name,
+                description: node.description,
+                // style: {...}
+              }
+            }),
+            edges: graphStore.graphData.edges.map((edge) => {
+              return {
+                source: edge.source,
+                target: edge.target,
+                // style: {...}
+              }
+            })
+          }}
           layout={{ type: graphStore.layout }}
           style={{ height: "1000px" }}
         >
