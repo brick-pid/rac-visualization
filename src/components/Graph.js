@@ -33,8 +33,7 @@ function Graph () {
       return (
         <div>
           <p>ID: {model.id}</p>
-          <p>Application: Dashboard</p>
-          <p>Score: {model.style.keyshape.size.toFixed(2)}</p>
+          <p>描述: {model.description}</p>
         </div>
       )
     }
