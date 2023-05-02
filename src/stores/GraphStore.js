@@ -85,6 +85,29 @@ const fetchEdgesData = action(async () => {
   }
 })
 
+// 获取某个timespan内的边数据
+const fetchEdgesDataByTimeSpan = action(async (timeSpan) => {
+  try {
+    const response = await axios.post("http://localhost:5000/invocation/timespan", {
+      begin: timeSpan[0],
+      end: timeSpan[1]
+    },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+    const edges_data = response.data
+    // 请求成功后，调用`setEdgesData`方法更新`edges_data`，并将`isEdgesDataLoaded`设置为`true`
+    graphStore.setEdgesData(edges_data)
+    graphStore.isEdgesDataLoaded = true
+    console.log("graphStore 中按照 timespan 更新 edges 数据完成", graphStore.graphData.edges)
+  } catch (error) {
+    console.error("fetch edges data error", error)
+  }
+})
+
 // 在graphStore类外部调用`fetchEdgesData`执行异步请求
 fetchEdgesData()
 
@@ -106,6 +129,7 @@ const fetchNodesData = action(async () => {
 fetchNodesData()
 
 export default graphStore
+export { fetchEdgesDataByTimeSpan }
 
 
 // graphin 的数据格式

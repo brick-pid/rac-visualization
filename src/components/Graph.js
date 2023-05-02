@@ -1,5 +1,5 @@
 import Graphin, { Behaviors } from "@antv/graphin"
-import graphStore from "../stores/GraphStore"
+import graphStore, { fetchEdgesDataByTimeSpan } from "../stores/GraphStore"
 import { observer } from "mobx-react-lite"
 import { Components } from "@antv/graphin"
 import { Button, DatePicker } from "antd"
@@ -16,15 +16,15 @@ const { ActivateRelations } = Behaviors
 function Graph () {
   const [dateRange, setDateRange] = useState([])
 
-  const handleDateRangeChange = (dates) => {
-    setDateRange(dates)
-  }
-
-  const getMonthRange = (offset) => {
-    const date = new Date()
-    const firstDay = new Date(date.getFullYear(), date.getMonth() - offset, 1)
-    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1 - offset, 0)
-    return [firstDay, lastDay]
+  const handleDateRangeChange = (dateRange) => {
+    // console.log("日期更新", dateRange)
+    if (dateRange[1]) {
+      setDateRange(dateRange)
+      const startDate = dateRange[0].format('YYYY-MM-DD')
+      const endDate = dateRange[1].format('YYYY-MM-DD')
+      console.log("日期更新", startDate, endDate)
+      fetchEdgesDataByTimeSpan([startDate, endDate])
+    }
   }
 
   const handleTooltip = (value) => {
@@ -40,8 +40,6 @@ function Graph () {
     return null
   }
 
-  console.log("在 Graph 组件中 ：graphStore.graphData", graphStore.graphData)
-
   return (
     <div>
       <div>
@@ -49,13 +47,7 @@ function Graph () {
         <Button onClick={() => { }} style={{ marginLeft: '10px' }}> 故障传播路径 </Button>
         <RangePicker
           style={{ marginLeft: '10px' }}
-          value={dateRange}
-          presets={{
-            'Last Month': getMonthRange(1),
-            'Last 3 Months': getMonthRange(3),
-            'Last 6 Months': getMonthRange(6),
-          }}
-          onChange={handleDateRangeChange}
+          onChange={(value) => { handleDateRangeChange(value) }}
         />
       </div>
 
