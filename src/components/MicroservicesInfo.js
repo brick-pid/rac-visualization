@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Input, Select, Space } from 'antd'
+import staticTopoStore from '../stores/StaticTopoStore'
 
 const { Search } = Input
 const { Option } = Select
 
 // 示例数据
 const generateMockData = () => {
-  const groups = ['Group A', 'Group B', 'Group C']
+  staticTopoStore.getApplication()
+  const applications = staticTopoStore.application
+  const apps = applications.map((app) => {
+    return app.app_name
+  })
+  console.log("apps", apps)
+  const groups = apps
   const services = ['ts-admin-basic-info', 'istio-ingressgateway', 'ts-admin-order-service']
   const data = []
 
