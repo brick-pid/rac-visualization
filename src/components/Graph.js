@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite"
 import { Components } from "@antv/graphin"
 import { Button, DatePicker } from "antd"
 import LayoutSelection from "./LayoutSelection"
-import { useState } from "react"
 
 const { Tooltip } = Components
 const { RangePicker } = DatePicker
@@ -14,12 +13,10 @@ const { ActivateRelations } = Behaviors
 
 
 function Graph () {
-  const [dateRange, setDateRange] = useState([])
 
   const handleDateRangeChange = (dateRange) => {
     // console.log("日期更新", dateRange)
     if (dateRange[1]) {
-      setDateRange(dateRange)
       const startDate = dateRange[0].format('YYYY-MM-DD')
       const endDate = dateRange[1].format('YYYY-MM-DD')
       console.log("日期更新", startDate, endDate)
@@ -40,6 +37,10 @@ function Graph () {
     return null
   }
 
+  const handleEdgeLabel = () => {
+
+  }
+
   return (
     <div>
       <div>
@@ -49,6 +50,7 @@ function Graph () {
           style={{ marginLeft: '10px' }}
           onChange={(value) => { handleDateRangeChange(value) }}
         />
+        <Button onClick={() => { }} style={{ marginLeft: '10px' }}> 显示边宽 </Button>
       </div>
 
 
@@ -68,7 +70,15 @@ function Graph () {
               return {
                 source: edge.source,
                 target: edge.target,
-                // style: {...}
+                style: {
+                  label: {
+                    value: edge.lineWidth
+                  },
+                  keyshape: {
+                    lineWidth: edge.lineWidth
+                  }
+
+                }
               }
             })
           }}

@@ -45,9 +45,38 @@ class GraphStore {
     edges: []
   };
 
+  // graphinData
+  graphinData = {
+    nodes: [],
+    edges: []
+  }
+  setGraphinNodes = (nodes) => {
+    this.graphinData.nodes = nodes
+  }
+  setGraphinEdges = (edges) => {
+    this.graphinData.edges = edges
+  }
+  // 添加一个状态，表示数据是否已加载
+  isGraphinEdgesLoaded = false;
+  isGraphinNodesLoaded = false;
+  // update flags
+  setGraphinEdgesLoaded = (isGraphinEdgesLoaded) => {
+    this.isGraphinEdgesLoaded = isGraphinEdgesLoaded
+  };
+  setGraphinNodesLoaded = (isGraphinNodesLoaded) => {
+    this.isGraphinNodesLoaded = isGraphinNodesLoaded
+  };
+
   // 添加一个状态，表示数据是否已加载
   isEdgesDataLoaded = false;
   isNodesDataLoaded = false;
+  // update flags
+  setEdgesDataLoaded = (isEdgesDataLoaded) => {
+    this.isEdgesDataLoaded = isEdgesDataLoaded
+  };
+  setNodesDataLoaded = (isNodesDataLoaded) => {
+    this.isNodesDataLoaded = isNodesDataLoaded
+  };
 
   setGraphData = (graphData) => {
     this.graphData = graphData
@@ -71,24 +100,10 @@ class GraphStore {
 
 const graphStore = new GraphStore()
 
-// 通过 action 处理异步请求
-const fetchEdgesData = action(async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/invocation/random")
-    const edges_data = response.data
-    // 请求成功后，调用`setEdgesData`方法更新`edges_data`，并将`isEdgesDataLoaded`设置为`true`
-    graphStore.setEdgesData(edges_data)
-    graphStore.isEdgesDataLoaded = true
-    console.log("graphStore 中请求 edges 数据完成", graphStore.graphData.edges)
-  } catch (error) {
-    console.error("fetch edges data error", error)
-  }
-})
-
 // 获取某个timespan内的边数据
 const fetchEdgesDataByTimeSpan = action(async (timeSpan) => {
   try {
-    const response = await axios.post("http://localhost:5000/invocation/timespan", {
+    const response = await axios.post("http://localhost:5000/invocation/timespan/compressed", {
       begin: timeSpan[0],
       end: timeSpan[1]
     },
@@ -101,15 +116,15 @@ const fetchEdgesDataByTimeSpan = action(async (timeSpan) => {
     const edges_data = response.data
     // 请求成功后，调用`setEdgesData`方法更新`edges_data`，并将`isEdgesDataLoaded`设置为`true`
     graphStore.setEdgesData(edges_data)
-    graphStore.isEdgesDataLoaded = true
-    console.log("graphStore 中按照 timespan 更新 edges 数据完成", graphStore.graphData.edges)
+    graphStore.setEdgesDataLoaded(true)
+    console.log("graphStore 中按照 timespan", timeSpan, " 更新 edges 数据完成", graphStore.graphData.edges)
   } catch (error) {
     console.error("fetch edges data error", error)
   }
 })
 
-// 在graphStore类外部调用`fetchEdgesData`执行异步请求
-fetchEdgesData()
+// 获取初始数据
+fetchEdgesDataByTimeSpan(["2019-10-01", "2019-11-01"])
 
 // 通过 action 处理异步请求
 const fetchNodesData = action(async () => {
@@ -118,7 +133,7 @@ const fetchNodesData = action(async () => {
     const nodes_data = response.data
     // 请求成功后，调用`setNodesData`方法更新`nodes_data`，并将`isNodesDataLoaded`设置为`true`
     graphStore.setNodesData(nodes_data)
-    graphStore.isNodesDataLoaded = true
+    graphStore.setNodesDataLoaded(true)
     console.log("graphStore 中请求 nodes 数据完成", graphStore.graphData.nodes)
   } catch (error) {
     console.error("fetch nodes data error", error)
@@ -128,19 +143,41 @@ const fetchNodesData = action(async () => {
 // 在graphStore类外部调用`fetchNodesData`执行异步请求
 fetchNodesData()
 
+const generateGraphinData = action(() => {
+  // set graphin data
+
+  graphStore.setGraphinEdgesLoaded(true)
+  graphStore.setGraphinNodesLoaded(true)
+
+  graphStore.setGraphinNodes(
+    graphStore.graphData.nodes.map((node) => {
+      return {
+        id: node.service_name,
+        description: node.description,
+        // style: {...}
+      }
+    })
+  )
+
+  graphStore.setGraphinEdges(
+    graphStore.graphData.edges.map((edge) => {
+      return {
+        source: edge.source,
+        target: edge.target,
+        style: {
+          keyshape: {
+            lineWidth: edge.lineWidth
+          }
+
+        }
+      }
+    })
+  )
+})
+
+if (graphStore.isEdgesDataLoaded && graphStore.isNodesDataLoaded) {
+  generateGraphinData()
+}
+
 export default graphStore
 export { fetchEdgesDataByTimeSpan }
-
-
-// graphin 的数据格式
-// {
-//   id: node.name,
-//   style: {
-//     keyshape: {
-//       size: node.probability * 100,
-//     },
-//     label: {
-//       value: node.name,
-//     }
-//   }
-// }
