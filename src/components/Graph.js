@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite"
 import { Components } from "@antv/graphin"
 import { Button, DatePicker } from "antd"
 import LayoutSelection from "./LayoutSelection"
+import { useState } from "react"
 
 const { Tooltip } = Components
 const { RangePicker } = DatePicker
@@ -13,7 +14,8 @@ const { ActivateRelations } = Behaviors
 
 
 function Graph () {
-
+  const [labelFlag, setLabelFlag] = useState(false)
+  const [criticalFlag, setCriticalFlag] = useState(false)
   const handleDateRangeChange = (dateRange) => {
     // console.log("日期更新", dateRange)
     if (dateRange[1]) {
@@ -37,9 +39,52 @@ function Graph () {
     return null
   }
 
-  const handleEdgeLabel = () => {
-
+  const toggleLabel = () => {
+    setLabelFlag(!labelFlag)
   }
+
+  const toggleCriticalPath = () => {
+    setCriticalFlag(!criticalFlag)
+  }
+
+  const getGraphinData = () => {
+    let nodes = graphStore.graphData.nodes.map((node) => {
+      return {
+        id: node.service_name,
+      }
+    })
+    let edges = graphStore.graphData.edges.map((edge) => {
+      return {
+        source: edge.source,
+        target: edge.target,
+        style: {
+          keyshape: {
+            lineWidth: edge.lineWidth
+          }
+        }
+      }
+    })
+    if (labelFlag) {
+      for (let node of nodes) {
+        node.style = {
+          label: {
+            value: node.id
+          }
+        }
+      }
+      for (let edge of edges) {
+        edge.style.label = { value: edge.style.keyshape.lineWidth }
+      }
+    }
+    if (criticalFlag) {
+      // todo
+    }
+    return {
+      nodes,
+      edges
+    }
+  }
+
 
   return (
     <div>
@@ -50,7 +95,7 @@ function Graph () {
           style={{ marginLeft: '10px' }}
           onChange={(value) => { handleDateRangeChange(value) }}
         />
-        <Button onClick={() => { }} style={{ marginLeft: '10px' }}> 显示边宽 </Button>
+        <Button onClick={toggleLabel} style={{ marginLeft: '10px' }}> 显示Label </Button>
       </div>
 
 
@@ -58,30 +103,7 @@ function Graph () {
 
       {graphStore.isEdgesDataLoaded && graphStore.isNodesDataLoaded && (
         <Graphin
-          data={{
-            nodes: graphStore.graphData.nodes.map((node) => {
-              return {
-                id: node.service_name,
-                description: node.description,
-                // style: {...}
-              }
-            }),
-            edges: graphStore.graphData.edges.map((edge) => {
-              return {
-                source: edge.source,
-                target: edge.target,
-                style: {
-                  label: {
-                    value: edge.lineWidth
-                  },
-                  keyshape: {
-                    lineWidth: edge.lineWidth
-                  }
-
-                }
-              }
-            })
-          }}
+          data={getGraphinData()}
           layout={{ type: graphStore.layout }}
           style={{ height: "1000px" }}
         >
