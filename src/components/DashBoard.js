@@ -47,6 +47,11 @@ function Dashboard () {
                   Microservices Info
                 </NavLink>
               </Menu.Item>
+              <Menu.Item key="33">
+                <NavLink to="/staticTopo">
+                  静态拓扑结构
+                </NavLink>
+              </Menu.Item>
             </SubMenu>
             <SubMenu key="sub4" title="自定义设置">
               <Menu.Item key="4">

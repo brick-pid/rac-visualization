@@ -6,6 +6,7 @@ import MicroservicesPage from './components/MicroservicesPage'
 import MicroservicesInfo from './components/MicroservicesInfo'
 import Rank from './components/Rank'
 import Setting from './components/Setting'
+import StaticTopo from './components/StaticTopo'
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
 
 function App () {
@@ -18,6 +19,7 @@ function App () {
           <Route path="microservicesInfo" element={<MicroservicesInfo />} />
           <Route path="rank" element={<Rank />} />
           <Route path="setting" element={<Setting />} />
+          <Route path="staticTopo" element={<StaticTopo />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
