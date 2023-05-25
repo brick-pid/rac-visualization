@@ -10,8 +10,8 @@ function Dashboard () {
 
     <Layout>
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%', backgroundColor: 'white' }}>
-        <div className="logo" style={{ fontWeight: 'bold', fontSize: '2rem' }}>
-          A system for detecting suspicious microservices
+        <div className="logo" style={{ fontWeight: 'bold', fontSize: '2rem', textAlign: 'center' }}>
+          面向微服务的根因分析系统
         </div>
       </Header>
       <Layout style={{ marginTop: '64px' }}>
@@ -25,38 +25,38 @@ function Dashboard () {
             <SubMenu key="sub1" title="微服务拓扑">
               <Menu.Item key="1">
                 <NavLink to="/graph">
-                  Graph
+                  动态调用图
                 </NavLink>
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" title="可疑微服务排序">
               <Menu.Item key="2">
-                <NavLink to="/rank">
-                  Rank
+                <NavLink to="/ranklist">
+                  可疑微服务排名列表
                 </NavLink>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub3" title="微服务数据">
+            <SubMenu key="sub3" title="系统信息查询">
               <Menu.Item key="3">
                 <NavLink to="/microservicesPage">
-                  Microservices Page
+                  系统信息
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="32">
                 <NavLink to="/microservicesInfo">
-                  Microservices Info
+                  微服务信息查询
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="33">
                 <NavLink to="/staticTopo">
-                  静态拓扑结构
+                  微服务依赖图
                 </NavLink>
               </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub4" title="自定义设置">
+            <SubMenu key="sub4" title="系统设置">
               <Menu.Item key="4">
                 <NavLink to="/setting">
-                  Setting
+                  系统与算法设置
                 </NavLink>
               </Menu.Item>
             </SubMenu>

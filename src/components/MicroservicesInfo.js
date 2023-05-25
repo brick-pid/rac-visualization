@@ -106,9 +106,11 @@ const MicroservicesInfo = () => {
           allowClear
           style={{ width: 200 }}
         >
-          <Option value="Group A">Group A</Option>
-          <Option value="Group B">Group B</Option>
-          <Option value="Group C">Group C</Option>
+          <Option value="Notification and configuration services">Notification and configuration services</Option>
+          <Option value="Admin services">Admin services</Option>
+          <Option value="Payment and pricing services">Payment and pricing services</Option>
+          <Option value="Order and reservation services">Order and reservation services</Option>
+          <Option value="Route and travel services">Route and travel services</Option>
         </Select>
       </Space>
       <Table

@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import graphStore from '../stores/GraphStore'
 import { List, Typography, Card } from 'antd'
 
 const { Title } = Typography

@@ -7,7 +7,8 @@ import MicroservicesInfo from './components/MicroservicesInfo'
 import Rank from './components/Rank'
 import Setting from './components/Setting'
 import StaticTopo from './components/StaticTopo'
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import RankList from './components/RankList'
 
 function App () {
   return (
@@ -20,6 +21,7 @@ function App () {
           <Route path="rank" element={<Rank />} />
           <Route path="setting" element={<Setting />} />
           <Route path="staticTopo" element={<StaticTopo />} />
+          <Route path="ranklist" element={<RankList />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
